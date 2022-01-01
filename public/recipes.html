@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0 user-scalable=yes"
+    />
+    <link href="style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="js/js.js" defer></script>
+    <title>Recipe Helper</title>
+  </head>
+  <body>
+    <div class="counterBox">
+      <div class="title">
+        <h1>Recipe Helper</h1>
+      </div>
+      <div class="background">
+        <img
+          class="openModal"
+          id="recipeImg"
+          data-id="0"
+          src=""
+          alt=""
+          width="600"
+          height="400"
+        />
+        <div id="recipeDesc" class="desc"></div>
+      </div>
+      <div class="buttons">
+        <button class="startOver" type="button">Start Over</button>
+        <button class="addToList" type="button">Add To List</button>
+        <button class="skip" type="button">Skip</button>
+      </div>
+    </div>
+
+    <!-- The Modal for the recipe -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalRecipeList"></p>
+      </div>
+    </div>
+
+    <!-- Recipes -->
+    <div class="recipeContainer">
+      <h2>Your Recipes</h2>
+    </div>
+
+    <!-- container for modals -->
+    <div id="modalsGoHere">
+     
+    </div>
+    <!-- Buttons to Print/Email/Text -->
+    <div class="buttonContainer">
+      <div class="buttons">
+        <button id="Email" type="button">Email</button>
+        <button id="Text" type="button">Text</button>
+        <button id="Print" type="button">Print</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="row">
+        <div class="col-1">
+          <a href="#">Back to top</a>
+          <p>&copy; Bradley Hughes 2021</p>
+        </div>
+        <div class="col-2">
+          <p class="motivationalQuote">
+            Junk Food you've craved for an hour, or the body you've craved for a
+            lifetime? <strong>YOUR DECISION.</strong>
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
