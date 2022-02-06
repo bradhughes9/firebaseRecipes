@@ -21,11 +21,11 @@
 <body>
   
 <!-- NAVBAR -->
-<nav class="z-depth-0 grey lighten-4" style="width: 100%;">
+<nav class="z-depth-0 white lighten-4" style="width: 100%;">
   <div class="nav-wrapper container">
     <a href="#" class="brand-logo">
       <!-- Logo created by Gal Shir -->
-      <img src="/public/img/watermelonLogo.jpg" style="width: 70px; height: 50px; margin-top: 10px;">
+      <img src="img\watermelonLogo.jpg" style="width: 70px; height: 50px; margin-top: 10px;">
     </a>
     <ul id="nav-mobile" class="right ">
         <li class="logged-in" style="display: none;">
@@ -102,14 +102,17 @@
         <h5>Recipe Name</h5>
         <input type="text" id="title" required>
       </div>
-      <div class="input-field ingredientField">
+      <div class="input-field">
         <h5>Ingredients</h5>
-        <textarea id="content" class="materialize-textarea" required></textarea>
-        <textarea id="content" class="materialize-textarea" ></textarea>
-        <textarea id="content" class="materialize-textarea" ></textarea>
+        <div class="ingredientContainer">
+        <textarea id="ingred" class="materialize-textarea ingredientField" required></textarea>
+        <textarea class="materialize-textarea ingredientField" ></textarea>
+        <textarea class="materialize-textarea ingredientField" ></textarea>
+        </div>
       </div>
       <button class="btn green darken-2 z-depth-0 addTextBtn">Add</button>
-      <button class="btn yellow darken-2 z-depth-0">Create</button>
+      <button id="createBtn" class="btn yellow darken-2 z-depth-0">Create</button>
+
     </form>
   </div>
 </div>

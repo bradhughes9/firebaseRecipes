@@ -62,15 +62,28 @@ const setupUI = (user) => {
 //Add more text inputs for user creating a recipe
 //The add button
 const addTextBtn = document.querySelector(".addTextBtn");
-const whereToAddTheTextField = document.querySelector(".ingredientField");
+const ingredientsModalContainer = document.querySelector(".ingredientContainer");
 addTextBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   //Create
   const textArea = document.createElement("textarea");
   textArea.classList.add("materialize-textarea");
-  textArea.setAttribute("id", "content");
+  textArea.classList.add("content");
+  textArea.classList.add("ingredientField");
 
   //Add the text area to the DOM
-  whereToAddTheTextField.append(textArea);
+  ingredientsModalContainer.appendChild(textArea);
 });
+
+  //Array to store all our ingredients
+  let ingredientArray = []
+
+function ingredientHelper() {
+  //Selector to locate the ingredient textAreas
+  const ingredientsTextArea = document.querySelectorAll(".ingredientField");
+  //Foreach ingredient add it to the array above
+  ingredientsTextArea.forEach(x => ingredientArray.push(x.value))
+  //Return the array when the function is called
+  return ingredientArray;
+}

@@ -16,18 +16,19 @@ auth.onAuthStateChanged((user) => {
 
 // Creating a new recipe
 const createForm = document.querySelector("#create-form");
-createForm.addEventListener("submit", (e) => {
+createForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   db.collection('recipes').add({
     title: createForm['title'].value,
-    ingredients: createForm['content'].value
+    ingredients: ingredientHelper()
   })
-    .then( () => {
-      console.log(`Your recipe ${createForm['title'].value} has been added.`);
-      const modal = document.querySelector("#modal-create-form");
+    .then(() => {
+      const modal = document.querySelector("#modal-create");
       M.Modal.getInstance(modal).close();
       createForm.reset();
+    }).catch(err => {
+      console.log(err.message);
     })
 });
 

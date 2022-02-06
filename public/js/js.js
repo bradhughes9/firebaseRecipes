@@ -147,7 +147,7 @@ for (let i = 0; i <= recipeList[0].recipe.length - 1; i++) {
 /*END OF THE START RECIPE*/
 
 //Onclick for the add to list button
-addButton.addEventListener("click", (e) => {
+addButton.addEventListener("click", () => {
   if (counter == recipeList.length - 1) {
     recipeImg.src = "img/backToBeginning.jpg";
     recipeDesc.innerHTML = " ";
