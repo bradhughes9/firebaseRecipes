@@ -48,12 +48,31 @@ const setupHelper = (ingredients) => {
 //setupUi will show and hide links based on if a user is logged in or not
 const loggedOutLinks = document.querySelectorAll(".logged-out");
 const loggedInLinks = document.querySelectorAll(".logged-in");
+const accountDetails = document.querySelector(".account-details");
+const adminItems = document.querySelectorAll('.admin');
 
 const setupUI = (user) => {
+  //toggle UI elements if user is logged in/out
   if (user) {
+    if(user.admin){
+      adminItems.forEach(item => item.style.display = 'block');
+    }
+    //account info
+    db.collection('users').doc(user.uid).get().then(doc => {
+      const html = `
+      <div>Logged in as: ${user.email}</div>
+      <div>${doc.data().bio}</div>
+      <div class="green-text">${user.admin ? 'Admin' : ''}</div>
+      `;
+      accountDetails.innerHTML = html;
+    });
+
     loggedInLinks.forEach((item) => (item.style.display = "block"));
     loggedOutLinks.forEach((item) => (item.style.display = "none"));
   } else {
+    adminItems.forEach(item => item.style.display = 'none');
+    //hide account info
+    accountDetails.innerHTML = "";
     loggedInLinks.forEach((item) => (item.style.display = "none"));
     loggedOutLinks.forEach((item) => (item.style.display = "block"));
   }
@@ -62,7 +81,9 @@ const setupUI = (user) => {
 //Add more text inputs for user creating a recipe
 //The add button
 const addTextBtn = document.querySelector(".addTextBtn");
-const ingredientsModalContainer = document.querySelector(".ingredientContainer");
+const ingredientsModalContainer = document.querySelector(
+  ".ingredientContainer"
+);
 addTextBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -76,14 +97,14 @@ addTextBtn.addEventListener("click", (e) => {
   ingredientsModalContainer.appendChild(textArea);
 });
 
-  //Array to store all our ingredients
-  let ingredientArray = []
+//Array to store all our ingredients
+let ingredientArray = [];
 
 function ingredientHelper() {
   //Selector to locate the ingredient textAreas
   const ingredientsTextArea = document.querySelectorAll(".ingredientField");
   //Foreach ingredient add it to the array above
-  ingredientsTextArea.forEach(x => ingredientArray.push(x.value))
+  ingredientsTextArea.forEach((x) => ingredientArray.push(x.value));
   //Return the array when the function is called
   return ingredientArray;
 }

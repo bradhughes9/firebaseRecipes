@@ -12,6 +12,26 @@ nav {
   overflow: hidden;
 }
 
+/* brand logo */
+@media screen and (max-width: 600px) {
+  nav .brand-logo {
+    position: relative;
+    top: 0px;
+    left: 1px;
+    height: auto;
+  }
+  nav {
+    height: 60px;
+  }
+}
+
+nav .brand-logo {
+  position: relative;
+  top: 0px;
+  left: 1px;
+  height: auto;
+}
+
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;

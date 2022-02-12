@@ -1,13 +1,28 @@
+//Add admin cloud function
+const adminForm = document.querySelector(".admin-actions");
+adminForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const adminEmail = document.querySelector("#admin-email").value;
+  const addAdminRole = functions.httpsCallable("addAdminRole");
+  addAdminRole({ email: adminEmail }).then((result) => {
+    console.log(result);
+  });
+});
+
 //Track auth status
 auth.onAuthStateChanged((user) => {
   if (user) {
-    //Using the database with db to get recipes
-    db.collection("recipes")
-      .get()
-      .then((snapshot) => {
+    user.getIdTokenResult()
+      .then(idTokenResult => {
+        user.admin = idTokenResult.claims.admin;
+        setupUI(user)
+      })
+    db.collection("recipes").onSnapshot(
+      (snapshot) => {
         setupRecipes(snapshot.docs);
-        setupUI(user);
-      });
+      },
+      (err) => console.log(err.message)
+    );
   } else {
     setupUI();
     setupRecipes([]);
@@ -16,20 +31,22 @@ auth.onAuthStateChanged((user) => {
 
 // Creating a new recipe
 const createForm = document.querySelector("#create-form");
-createForm.addEventListener('submit', (e) => {
+createForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  db.collection('recipes').add({
-    title: createForm['title'].value,
-    ingredients: ingredientHelper()
-  })
+  db.collection("recipes")
+    .add({
+      title: createForm["title"].value,
+      ingredients: ingredientHelper(),
+    })
     .then(() => {
       const modal = document.querySelector("#modal-create");
       M.Modal.getInstance(modal).close();
       createForm.reset();
-    }).catch(err => {
-      console.log(err.message);
     })
+    .catch((err) => {
+      console.log(err.message);
+    });
 });
 
 //signup
@@ -42,11 +59,22 @@ signupForm.addEventListener("submit", (e) => {
   const password = signupForm["signup-password"].value;
 
   //sign up the user
-  auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-    const modal = document.querySelector("#modal-signup");
-    M.Modal.getInstance(modal).close();
-    signupForm.reset();
-  });
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then((cred) => {
+      return db.collection("users").doc(cred.user.uid).set({
+        bio: signupForm["signup-bio"].value,
+        email: cred.user.email
+      });
+    })
+    .then(() => {
+      const modal = document.querySelector("#modal-signup");
+      M.Modal.getInstance(modal).close();
+      signupForm.reset();
+      signupForm.querySelector('.error').innerHTML = '';
+    }).catch(err => {
+      signupForm.querySelector('.error').innerHTML = err.message;
+    })
 });
 
 //Logout
@@ -68,6 +96,9 @@ loginForm.addEventListener("submit", (e) => {
   auth.signInWithEmailAndPassword(email, password).then(() => {
     const modal = document.querySelector("#modal-login");
     M.Modal.getInstance(modal).close();
-    signupForm.reset();
-  });
+    loginForm.reset();
+    loginForm.querySelector('.error').innerHTML = '';
+  }).catch(err => {
+    loginForm.querySelector('.error').innerHTML = err.message;
+  })
 });
