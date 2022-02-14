@@ -7,16 +7,16 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0 user-scalable=yes"
   />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&display=swap"
     rel="stylesheet"
   />
+  <link href="materialize.css" rel="stylesheet" />
   <link href="style.css" rel="stylesheet" />
   <title>Recipe Helper</title>
-
+  <link rel="shortcut icon" type="image/jpg" href="img\logo.png"/>
 </head>
 <body>
   
@@ -25,13 +25,13 @@
   <div class="nav-wrapper container">
     <a href="#" class="brand-logo">
       <!-- Logo created by Gal Shir -->
-      <img src="img\watermelonLogo.jpg" style="width: 70px; height: 50px; margin-top: 10px;">
+      <img src="img\logo.png" style="width: 70px; height: 50px; margin-top: 10px;">
     </a>
     <ul id="nav-mobile" class="right ">
         <li class="logged-in" style="display: none;">
           <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
         </li>
-        <li class="admin" style="display: none;">
+        <li>
           <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create a Recipe</a>
         </li>
         <li class="logged-out" style="display: none;">
@@ -47,12 +47,6 @@
     </ul>
   </div>
 </nav>
-
-  <!-- ADMIN ACTIONS -->
-  <form class="center-align admin-actions admin" style="margin: 40px auto; max-width: 300px; display: none;">
-    <input type="email" placeholder="User email" id="admin-email" required />
-    <button class="btn-small yellow darken-2 z-depth-0">Make admin</button>
-  </form>
 
   <!-- SIGN UP MODAL -->
   <div id="modal-signup" class="modal">
@@ -105,7 +99,7 @@
   </div>
 </div>
 
-<!-- CREATE GUIDE MODAL -->
+<!-- CREATE RECIPE MODAL -->
 <div id="modal-create" class="modal">
   <div class="modal-content">
     <h4>Create Recipe</h4><br />
@@ -129,14 +123,7 @@
   </div>
 </div>
 
-  <!-- The Modal for the recipe -->
-  <div id="myModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p id="modalRecipeList"></p>
-    </div>
-  </div>
+
 
   <!-- Recipes -->
   <div class="pageContainer">
@@ -149,11 +136,13 @@
   </div>
   </div>
   
+  <!-- Ingredients -->
+  <div class="ingredientContainer">
 
-  <!-- container for modals -->
-  <div id="modalsGoHere">
-    
   </div>
+
+
+
   <!-- Buttons to Print/Email/Text (these have no functionality yet)
   <div class="buttonContainer">
     <div class="buttons">
@@ -205,8 +194,8 @@
     const functions = firebase.functions();
     db.settings({ timestampsInSnapshots: true});
   </script>
+    <script src="js/materialize.js"></script>
     <script src="js/app.js"></script>
     <script src="js/auth.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

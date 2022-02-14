@@ -15,8 +15,8 @@ const setupRecipes = (data) => {
     data.forEach((doc) => {
       const recipe = doc.data();
       const li = `
-    <li>
-      <div class="collapsible-header grey lighten-4">${recipe.title}</div>
+    <li style="list-style-type: none;">
+      <div class="collapsible-header grey lighten-4 center-align">${recipe.title}</div>
       <div class="collapsible-body white"><ul class="z-depth-0">${setupHelper(
         recipe.ingredients
       )}</ul>
@@ -39,7 +39,7 @@ const setupHelper = (ingredients) => {
   //Make a container to hold all of the lists for each ingredient
   let html = "";
   for (let i = 0; i < lengthOfRecipe; i++) {
-    let li = `<li>${ingredients[i]}</li>`;
+    let li = `<li class="recipesLi">${ingredients[i]}</li>`;
     html += li;
   }
   return html;
@@ -49,20 +49,15 @@ const setupHelper = (ingredients) => {
 const loggedOutLinks = document.querySelectorAll(".logged-out");
 const loggedInLinks = document.querySelectorAll(".logged-in");
 const accountDetails = document.querySelector(".account-details");
-const adminItems = document.querySelectorAll('.admin');
 
 const setupUI = (user) => {
   //toggle UI elements if user is logged in/out
   if (user) {
-    if(user.admin){
-      adminItems.forEach(item => item.style.display = 'block');
-    }
     //account info
     db.collection('users').doc(user.uid).get().then(doc => {
       const html = `
       <div>Logged in as: ${user.email}</div>
       <div>${doc.data().bio}</div>
-      <div class="green-text">${user.admin ? 'Admin' : ''}</div>
       `;
       accountDetails.innerHTML = html;
     });
@@ -70,7 +65,6 @@ const setupUI = (user) => {
     loggedInLinks.forEach((item) => (item.style.display = "block"));
     loggedOutLinks.forEach((item) => (item.style.display = "none"));
   } else {
-    adminItems.forEach(item => item.style.display = 'none');
     //hide account info
     accountDetails.innerHTML = "";
     loggedInLinks.forEach((item) => (item.style.display = "none"));
