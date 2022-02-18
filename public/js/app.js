@@ -7,17 +7,38 @@ document.addEventListener("DOMContentLoaded", function () {
   M.Collapsible.init(items);
 });
 
-const recipeList = document.querySelector(".recipes");
+// Write the Groceries to the page
+const groceryList = document.querySelector(".groceries");
+const setupGroceries = (data) => {
+  if (data.length) {
+    let html = "";
+    data.forEach((doc) => {
+      const grocery = doc.data();
+      const li = `
+    <li class="groceryLi ingredient">
+      ${grocery.title}
+    </li>
+    `;
+      html += li;
+    });
+    groceryList.innerHTML = html;
+  } else {
+    groceryList.innerHTML =
+      '<h5 class="center-align">Login to view your recipes.</h5>';
+  }
+};
 
+// Write the recipes to the page
+const recipeList = document.querySelector(".recipes");
 const setupRecipes = (data) => {
   if (data.length) {
     let html = "";
     data.forEach((doc) => {
       const recipe = doc.data();
       const li = `
-    <li style="list-style-type: none;">
+    <li>
       <div class="collapsible-header grey lighten-4 center-align">${recipe.title}</div>
-      <div class="collapsible-body white"><ul class="z-depth-0">${setupHelper(
+      <div class="collapsible-body white"><ul class="z-depth-0">${listIngredients(
         recipe.ingredients
       )}</ul>
       </div>
@@ -33,13 +54,18 @@ const setupRecipes = (data) => {
 };
 
 //functions for setupRecipes to display lists
-const setupHelper = (ingredients) => {
+const listIngredients = (ingredients) => {
   //First we find how many ingredients are in the recipe
   const lengthOfRecipe = ingredients.length;
   //Make a container to hold all of the lists for each ingredient
   let html = "";
   for (let i = 0; i < lengthOfRecipe; i++) {
-    let li = `<li class="recipesLi">${ingredients[i]}</li>`;
+    let li = `
+    <li class="ingredientsLi ingredient">${ingredients[i]}<p class="right addIngredient" style="display: inline;">
+        +
+        </p>
+     
+    </li>`;
     html += li;
   }
   return html;
@@ -102,3 +128,11 @@ function ingredientHelper() {
   //Return the array when the function is called
   return ingredientArray;
 }
+
+//Mobile nav
+document.addEventListener('DOMContentLoaded', function () {
+  var elems = document.querySelectorAll('.sidenav');
+  // ***NOTE***: Optional options, are passed as the 2nd argument as an object
+  var instances = M.Sidenav.init(elems, { inDuration: 600, edge: 'right' });
+});
+

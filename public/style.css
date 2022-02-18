@@ -3,31 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* brand logo */
-@media screen and (max-width: 600px) {
-  nav .brand-logo {
-    position: relative;
-    top: 0px;
-    left: 1px;
-    height: auto;
-  }
-  nav {
-    height: 60px;
-  }
-}
-
-nav .brand-logo {
-  position: relative;
-  top: 0px;
-  left: 1px;
-  height: auto;
-}
-
-body {
-  background-color: #3e503c;
+html{
   width: 100%;
 }
-
+body {
+  width: 100%;
+}
 button {
   width: 120px;
   height: 50px;
@@ -36,22 +17,50 @@ button {
   padding: 5px 10px;
   font-size: 0.97rem;
 }
-
-.recipeContainer {
-  margin-top: 150px;
+.Container {
   max-width: 100%;
-  position: relative;
-  bottom: 0;
-  background-color: #7f886a;
   width: 100%;
   overflow: hidden;
   font-family: "Fuzzy Bubbles", cursive;
-  padding: 0 0 25px 0;
+  padding: 15px 0 25px 0;
 }
-.recipeContainer h2 {
+.Container h2 {
   font-size: 2rem;
   margin: 15px auto;
   text-align: center;
+}
+.recipeContainer {
+  background-color: #bbdefb;
+}
+.groceryContainer {
+  background-color: #bbdefb;
+}
+.groceryContainer h2 {
+  padding-top:  10px;
+  border-bottom: 2px solid black;
+}
+.ingredient {
+ line-height: 2.7rem;
+ font-size: 1.12rem;
+}
+.ingredient a {
+  float: right;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.ingredient a:visited {
+  color: black;
+}
+ul:not(.browser-default) > li {
+  list-style-type: none;
+}
+ul:not(.browser-default) > .ingredientsLi  {
+  list-style-type: circle;
+}
+ul:not(.browser-default) > .groceryLi  {
+  padding-left: 10px;
+  list-style-position: inside;
+  list-style-type: circle;
 }
 /* End of recipe gallery */
 
@@ -76,9 +85,8 @@ button {
 /* Footer */
 footer {
   padding: 10px 0 5px 0;
-  background-color: #f3ecdb;
   width: 100%;
-  position: absolute;
+  position: relative;
   bottom: 0;
 }
 

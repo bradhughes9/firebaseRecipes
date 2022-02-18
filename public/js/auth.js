@@ -8,6 +8,12 @@ auth.onAuthStateChanged((user) => {
       },
       (err) => console.log(err.message)
     );
+    db.collection("groceries").onSnapshot(
+      (snapshot) => {
+        setupGroceries(snapshot.docs);
+      },
+      (err) => console.log(err.message)
+    )
   } else {
     setupUI();
     setupRecipes([]);
@@ -18,7 +24,6 @@ auth.onAuthStateChanged((user) => {
 const createForm = document.querySelector("#create-form");
 createForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
   db.collection("recipes")
     .add({
       title: createForm["title"].value,
@@ -33,6 +38,45 @@ createForm.addEventListener("submit", (e) => {
       console.log(err.message);
     });
 });
+
+
+/* FOR ADDING GROCERY */
+
+// This listens for a click anywhere on the dom, looking specifically for 
+//my .addIngredient class paragraphs
+document.addEventListener('click', () => {
+  let paragraph = document.querySelectorAll('.addIngredient');
+  paragraph.forEach(p => {
+      p.addEventListener('click', addElementToGroceries);
+  });
+});
+
+// Then once it is found, it bubbles up the node tree until it finds my li
+// containing the ingredient value  which will then use the substring method
+// to chop off everything besides the ingredient
+function addElementToGroceries(ev) {
+  let toFind = 'li'; // name of the tag we want to find.
+  let currentElement = ev.target;
+  while (toFind !== currentElement.tagName.toLowerCase() &&
+      currentElement.tagName.toLowerCase() !== 'html') {
+      currentElement = currentElement.parentNode;
+  }
+  let word = currentElement.textContent;
+  word = word.substring(0, word.indexOf('+'))
+  //Now we add the ingredient to the grocery list
+  db.collection("groceries")
+  .add({
+    title: word,
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+}
+
+
+
+
+
 
 //signup
 const signupForm = document.querySelector("#signup-form");

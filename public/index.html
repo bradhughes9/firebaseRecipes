@@ -7,13 +7,16 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0 user-scalable=yes"
   />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&display=swap"
     rel="stylesheet"
   />
-  <link href="materialize.css" rel="stylesheet" />
+  <!-- <link href="materialize.css" rel="stylesheet" /> -->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="style.css" rel="stylesheet" />
   <title>Recipe Helper</title>
   <link rel="shortcut icon" type="image/jpg" href="img\logo.png"/>
@@ -21,32 +24,54 @@
 <body>
   
 <!-- NAVBAR -->
-<nav class="z-depth-0 white lighten-4" style="width: 100%;">
-  <div class="nav-wrapper container">
-    <a href="#" class="brand-logo">
+<nav class="nav-wrapper grey">
+  <div class="container">
+    <a href="#" class="brand-logo left">
       <!-- Logo created by Gal Shir -->
       <img src="img\logo.png" style="width: 70px; height: 50px; margin-top: 10px;">
     </a>
-    <ul id="nav-mobile" class="right ">
+    <a href="#" data-target="mobile-links" class="sidenav-trigger right hide-on-med-and-up">
+      <i class="material-icons">menu</i>
+    </a>
+    <ul id="nav-mobile" class="right hide-on-small-only grey lighten-1">
         <li class="logged-in" style="display: none;">
-          <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+          <a href="#" class="white-text modal-trigger " data-target="modal-account">Account</a>
         </li>
         <li>
-          <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create a Recipe</a>
+          <a href="#" class="white-text modal-trigger" data-target="modal-create">Create a Recipe</a>
         </li>
         <li class="logged-out" style="display: none;">
-          <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+          <a href="#" class="white-text modal-trigger" data-target="modal-login">Login</a>
         </li>
         <li class="logged-out" style="display: none;">
-          <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+          <a href="#" class="white-text modal-trigger" data-target="modal-signup">Sign up</a>
         </li>
         <li class="logged-in" style="display: none;">
-          <a href="#" class="grey-text" id="logout">Logout</a>
+          <a href="#" class="white-text" id="logout">Logout</a>
         </li>
       </span>
     </ul>
   </div>
 </nav>
+<!-- Mobile Nav -->
+<ul class="sidenav" id="mobile-links">
+  <li class="logged-in" style="display: none;">
+    <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+  </li>
+  <li>
+    <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create a Recipe</a>
+  </li>
+  <li class="logged-out" style="display: none;">
+    <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+  </li>
+  <li class="logged-out" style="display: none;">
+    <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+  </li>
+  <li class="logged-in" style="display: none;">
+    <a href="#" class="grey-text" id="logout">Logout</a>
+  </li>
+</ul>
+
 
   <!-- SIGN UP MODAL -->
   <div id="modal-signup" class="modal">
@@ -126,22 +151,22 @@
 
 
   <!-- Recipes -->
-  <div class="pageContainer">
-  <div class="recipeContainer">
-    <div class="container" style="margin-top: 40px;">
-    <h2>Your Recipes</h2>
-      <ul class="collapsible z-depth-0 recipes" style="border: none;">
-    </ul>
-    </div>
-  </div>
+  <div class="recipeContainer Container">
+      <div class="container" style="margin-top: 40px;">
+        <h2>Your Recipes</h2>
+        <ul class="collapsible z-depth-0 recipes" style="border: none;">
+        </ul>
+      </div>
   </div>
   
-  <!-- Ingredients -->
-  <div class="ingredientContainer">
-
-  </div>
-
-
+  <!-- Grocery -->
+    <div class="Container groceryContainer">
+      <div class="container white" style="margin-top: 40px;">
+        <h2>Your Groceries</h2>
+            <ul class="collapsible z-depth-0 groceries" style="border: none;">
+            </ul>
+      </div>
+    </div>
 
   <!-- Buttons to Print/Email/Text (these have no functionality yet)
   <div class="buttonContainer">
@@ -153,7 +178,7 @@
   </div> -->
 
   <!-- Footer -->
-  <footer>
+  <footer class="grey lighten-1">
     <div class="row">
       <div class="col-1">
         <a href="#">Back to top</a>
@@ -194,8 +219,8 @@
     const functions = firebase.functions();
     db.settings({ timestampsInSnapshots: true});
   </script>
-    <script src="js/materialize.js"></script>
-    <script src="js/app.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
