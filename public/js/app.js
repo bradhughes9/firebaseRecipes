@@ -14,14 +14,16 @@ const setupGroceries = (data) => {
     let html = "";
     data.forEach((doc) => {
       const grocery = doc.data();
+      
       const li = `
-    <li class="groceryLi ingredient">
+    <li data-id="${doc.id}" class="groceryLi ingredient">
       ${grocery.title}
       <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content removeButton">
     <i class="material-icons removeIngredient">remove</i>
   </a>
     </li>
     `;
+
       html += li;
     });
     groceryList.innerHTML = html;

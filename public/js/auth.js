@@ -96,15 +96,10 @@ function removeElementFromGroceries(ev) {
       currentElement.tagName.toLowerCase() !== 'html') {
       currentElement = currentElement.parentNode;
   }
-  let word = currentElement.textContent;
-  console.log(word)
-  word = word.substring(0, word.indexOf('remove'))
-  word.trim()
-  console.log(word)
-
+  let id = currentElement.getAttribute('data-id');
   //Now we add the ingredient to the grocery list
   
-  db.collection("groceries").doc("word").delete().then(() => {
+  db.collection("groceries").doc(id).delete().then(() => {
     console.log("Document successfully deleted!");
   }).catch((error) => {
       console.error("Error removing document: ", error);
