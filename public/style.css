@@ -39,6 +39,9 @@ button {
   padding-top:  10px;
   border-bottom: 2px solid black;
 }
+.removeButton {
+  margin-right: 30px;
+}
 .ingredient {
  line-height: 2.7rem;
  font-size: 1.12rem;

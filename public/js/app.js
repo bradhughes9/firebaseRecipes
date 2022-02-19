@@ -17,6 +17,9 @@ const setupGroceries = (data) => {
       const li = `
     <li class="groceryLi ingredient">
       ${grocery.title}
+      <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content removeButton">
+    <i class="material-icons removeIngredient">remove</i>
+  </a>
     </li>
     `;
       html += li;
@@ -61,9 +64,9 @@ const listIngredients = (ingredients) => {
   let html = "";
   for (let i = 0; i < lengthOfRecipe; i++) {
     let li = `
-    <li class="ingredientsLi ingredient">${ingredients[i]}<p class="right addIngredient" style="display: inline;">
-        +
-        </p>
+    <li class="ingredientsLi ingredient">${ingredients[i]}  <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content">
+    <i class="material-icons addIngredient">add</i>
+  </a>
      
     </li>`;
     html += li;
